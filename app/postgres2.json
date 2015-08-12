@@ -1,0 +1,29 @@
+{
+  "id": "postgres2",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "postgres",
+      "network": "BRIDGE",
+      "parameters": [{
+        "key": "volume-driver",
+        "value": "flocker"
+      }]
+    },
+    "volumes":[{
+      "containerPath": "/var/lib/postgresql/data",
+      "hostPath": "pgdemo",
+      "mode": "RW"
+    }],
+    "forcePullImage":true
+  },
+  "env": {
+    "PGDATA": "/var/lib/postgresql/data"
+  },
+  "constraints": [
+    ["hostname", "UNIQUE"]
+  ],
+  "instances": 1,
+  "cpus": 0.1,
+  "mem": 256
+}
