@@ -10,6 +10,7 @@ cat <<EOF > /etc/hosts
 127.0.0.1 localhost
 #{node1} node1
 #{node2} node2
+EOF
 SCRIPT
     return $script
 end
