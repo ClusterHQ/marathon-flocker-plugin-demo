@@ -1,0 +1,15 @@
+docker run \
+    -c 1024 -m 134217728 \
+    -e MARATHON_APP_VERSION=2015-08-17T18:26:06.135Z -e HOST=172.16.79.250 -e PORT_3306=8000 -e MESOS_TASK_ID=marathon-demo_mysql.6e438c52-450d-11e5-9bd1-0242fb0e950c -e PORT=8000 -e PORTS=8000 -e MYSQL_ROOT_PASSWORD=apples -e MARATHON_APP_ID=/marathon-demo/mysql -e PORT0=8000 -e MESOS_SANDBOX=/mnt/mesos/sandbox \
+    -v /tmp/mesos/slaves/20150817-162247-4199485612-5050-2457-S0/frameworks/20150817-162247-4199485612-5050-2457-0000/executors/marathon-demo_mysql.6e438c52-450d-11e5-9bd1-0242fb0e950c/runs/6b3c1987-69dd-471d-ad79-e211c64a91e8:/mnt/mesos/sandbox \
+    --net bridge \
+    --volume-driver=flocker --volume=mesosdemo10:/var/lib/mysql \
+    -p 8000:3306/tcp \
+    --name mesos-20150817-162247-4199485612-5050-2457-S0.6b3c1987-69dd-471d-ad79-e211c64a91e8 \
+    mysql
+
+
+removed flags:
+
+
+docker run -d -v mesosdemo7:/var/lib/mysql -p 8000:3306 --volume-driver flocker -e MYSQL_ROOT_PASSWORD=apples mysql
