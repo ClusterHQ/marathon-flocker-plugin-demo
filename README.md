@@ -74,6 +74,7 @@ navigate to our new node at http://172.16.79.251:8090/ in a browser, login once 
 ![Flocker Marathon 5](img/flocker-marathon-5.png)
 
 Your data volume will always be there following your application in tandem with changes in your Marathon configuration.
+
 ![overly attached data volume4](img/overly-attached-data-volume.png)
 
 
