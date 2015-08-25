@@ -1,0 +1,67 @@
+{
+  "id":"marathon-demo",
+  "apps":[{
+    "id": "mysql",
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "mysql",
+        "network": "BRIDGE",
+        "portMappings": [{
+          "containerPort": 3306,
+          "hostPort": 8306,
+          "protocol": "tcp"
+        }],
+        "parameters": [{
+          "key": "volume-driver",
+          "value": "flocker"
+        },{
+          "key": "volume",
+          "value": "mesosdemo:/var/lib/mysql"
+        }]
+      },
+      "forcePullImage":true
+    },
+    "env": {
+      "MYSQL_ROOT_PASSWORD": "password"
+    },
+    "ports":[
+      8306
+    ],
+    "constraints": [
+      ["disk", "CLUSTER", "ssd"]
+    ],
+    "instances": 1,
+    "cpus": 0.5,
+    "mem": 512
+  },{
+    "id": "phpmyadmin",
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "corbinu/docker-phpmyadmin",
+        "network": "BRIDGE",
+        "portMappings": [{
+          "containerPort": 80,
+          "hostPort": 8090,
+          "protocol": "tcp"
+        }]
+      },
+      "forcePullImage":true
+    },
+    "env": {
+      "MYSQL_USERNAME": "root",
+      "MYSQL_PORT_3306_TCP_ADDR": "172.17.42.1",
+      "MYSQL_PORT_3306_TCP_PORT": "8306"
+    },
+    "ports":[
+      8090
+    ],
+    "constraints": [
+      ["disk", "CLUSTER", "ssd"]
+    ],
+    "instances": 1,
+    "cpus": 0.1,
+    "mem": 256
+  }]
+}
