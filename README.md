@@ -46,7 +46,7 @@ The volume being established in this instance is a copy on write ZFS volume that
 #### The Marathon App Groups API [`POST /V2/groups`](https://mesosphere.github.io/marathon/docs/rest-api.html#post-v2-groups)
 
 ```bash
-$ curl -i -H 'Content-type: application/json' --data  @app/application-group-spinning-disk.json  @- http://172.16.79.250:8080/v2/groups
+$ curl -i -H 'Content-type: application/json' --data @app/application-group-spinning-disk.json http://172.16.79.250:8080/v2/groups
 ```
 ![Flocker Marathon 2](img/flocker-marathon-2.png)
 
@@ -64,7 +64,7 @@ Now lets remove the application group and redeploy the application group with a 
 ```bash
 $ curl -X DELETE http://172.16.79.250:8080/v2/groups/marathon-demo?force=true
 # redeploy our application group with updated manifest
-$ curl -i -H 'Content-type: application/json' --data  @app/application-group-ssd-disk.json  @- http://172.16.79.250:8080/v2/groups
+$ curl -i -H 'Content-type: application/json' --data @app/application-group-ssd-disk.json http://172.16.79.250:8080/v2/groups
 ```
 
 Flocker behind the scenes automagically migrates the data volume (`mesosdemo:/var/lib/mysql`) from our spinning drive constrained node to a node with solid state drives. Voila!
